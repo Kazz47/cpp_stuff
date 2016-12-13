@@ -1,0 +1,4 @@
+#pragma once
+
+#define VERSION_MAJOR @Hangman_VERSION_MAJOR@
+#define VERSION_MINOR @Hangman_VERSION_MINOR@
