@@ -9,14 +9,12 @@ class Stringify {
 
   public:
     template<class T>
-    Stringify& operator<<(const T& t)
-    {
+    Stringify& operator<<(const T& t) {
         mStream << t;
         return *this;
     }
 
-    operator std::string() const
-    {
+    operator std::string() const {
         return mStream.str();
     }
 };
