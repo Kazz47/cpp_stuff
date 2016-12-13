@@ -7,8 +7,8 @@
 using namespace std;
 
 int main(int argc, char* argv[]) {
-    gflags::SetVersionString(Stringify() << VERSION_MAJOR << "." << VERSION_MINOR);
-    gflags::SetUsageMessage(Stringify() << "This program prints hello!\n"
+    gflags::SetVersionString(StringIt() << VERSION_MAJOR << "." << VERSION_MINOR);
+    gflags::SetUsageMessage(StringIt() << "This program prints hello!\n"
         << argv[0] << " <some-param>");
     gflags::ParseCommandLineFlags(&argc, &argv, true);
     google::InitGoogleLogging(argv[0]);

@@ -3,13 +3,14 @@
 #include <string>
 #include <sstream>
 
-class Stringify {
-  private:
-    std::ostringstream mStream;
+/**
+ * Helper class for creating a string.
+ */
+class StringIt {
 
-  public:
-    template<class T>
-    Stringify& operator<<(const T& t) {
+public:
+    template <typename T>
+    StringIt& operator<<(const T& t) {
         mStream << t;
         return *this;
     }
@@ -17,4 +18,8 @@ class Stringify {
     operator std::string() const {
         return mStream.str();
     }
+
+private:
+    std::ostringstream mStream;
+
 };
