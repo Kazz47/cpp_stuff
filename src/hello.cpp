@@ -1,5 +1,5 @@
 #include "hangman/version.h"
-#include "hangman/utils.h"
+#include "utils/stringIt.h"
 #include <iostream>
 #include <gflags/gflags.h>
 #include <glog/logging.h>

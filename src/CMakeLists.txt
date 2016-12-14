@@ -1,7 +1,7 @@
-find_package(glog REQUIRED)
-find_package(gflags REQUIRED)
+find_package (glog REQUIRED)
+find_package (gflags REQUIRED)
 
-add_executable(hangman hello.cpp)
+add_executable (hangman hello.cpp)
 target_link_libraries (hangman glog gflags)
 
 # Install
@@ -11,7 +11,7 @@ install (TARGETS hangman DESTINATION bin)
 # Test
 include(CTest)
 
-add_test(HangmanRuns ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/hangman)
+add_test (HangmanRuns ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/hangman)
 
 add_test (HangmanUsage ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/hangman)
 set_tests_properties (HangmanUsage
