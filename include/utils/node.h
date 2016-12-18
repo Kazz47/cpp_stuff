@@ -2,14 +2,14 @@
 
 #include <vector>
 
-template <typename T, size_t N = 0>
+template <typename T>
 class Node {
 public:
     typedef std::vector<Node<T>*> Nodes;
 
-    explicit Node(const T& val)
+    explicit Node(const T& val, size_t numChildren = 0)
         : mValue(val),
-          mChildNodes(N, nullptr),
+          mChildNodes(numChildren, nullptr),
           mParent(nullptr) {}
 
     T value() const { return mValue; }

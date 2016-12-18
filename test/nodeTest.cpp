@@ -29,8 +29,9 @@ TEST(nodeTest, canSetParent) {
 }
 
 TEST(nodeTest, canSetInitialChildSize) {
-    const Node<int, 10> node(20);
+    const size_t numChildren = 10;
+    const Node<int> node(20, numChildren);
 
     EXPECT_FALSE(node.children().empty());
-    EXPECT_EQ(10, node.children().size());
+    EXPECT_EQ(numChildren, node.children().size());
 }
