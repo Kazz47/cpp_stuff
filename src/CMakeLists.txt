@@ -1,7 +1,8 @@
 find_package (glog REQUIRED)
 find_package (gflags REQUIRED)
 
-add_executable (hangman hello.cpp)
+add_executable (hangman hangman.cpp)
+target_compile_features (hangman PRIVATE cxx_auto_type)
 target_link_libraries (hangman glog gflags)
 
 # Install
@@ -10,14 +11,6 @@ install (TARGETS hangman DESTINATION bin)
 
 # Test
 include(CTest)
-
-add_test (HangmanRuns ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/hangman)
-
-add_test (HangmanUsage ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/hangman)
-set_tests_properties (HangmanUsage
-  PROPERTIES
-  PASS_REGULAR_EXPRESSION "^Hello World!\n$"
-)
 
 add_test (HangmanVersion ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/hangman --version)
 set_tests_properties (HangmanVersion
