@@ -69,14 +69,14 @@ endif(MSVC)
 
 # Find the libraries
 if(MSVC)
-     _FIND_GLOG_LIBRARIES(GLOG_LIBRARIES libglog.lib)
+     _FIND_GLOG_LIBRARIES(GLOG_LIBRARIES glog)
 else(MSVC)
      # Linux/OS X builds
      if(UNIX)
-          _FIND_GLOG_LIBRARIES(GLOG_LIBRARIES libglog.so)
+          _FIND_GLOG_LIBRARIES(GLOG_LIBRARIES glog)
      endif(UNIX)
      if(APPLE)
-          _FIND_GLOG_LIBRARIES(GLOG_LIBRARIES libglog.dylib)
+          _FIND_GLOG_LIBRARIES(GLOG_LIBRARIES glog)
      endif(APPLE)
 endif(MSVC)
 
