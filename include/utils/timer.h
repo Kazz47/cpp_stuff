@@ -1,21 +1,14 @@
 #pragma once
 
 #include <chrono>
+#include <functional>
 
 class Timer
 {
 public:
-    explicit Timer(const std::function<void(size_t)>& callback)
-        : mStart(std::chrono::high_resolution_clock::now()),
-          mCallback(callback) {}
+    explicit Timer(const std::function<void(size_t)>& callback);
 
-    ~Timer()
-    {
-        using namespace std::chrono;
-
-        const auto end = high_resolution_clock::now();
-        mCallback(duration_cast<microseconds>(end - mStart).count());
-    }
+    ~Timer();
 
 private:
     std::chrono::high_resolution_clock::time_point mStart;

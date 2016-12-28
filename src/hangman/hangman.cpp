@@ -15,19 +15,6 @@ using namespace std;
 DEFINE_string(word_file, "lexicon.txt", "filepath for the hangman dictionary");
 
 namespace {
-    class TimerLog {
-    public:
-        explicit TimerLog(const string& message)
-            : mMessage(message) {}
-
-        void operator()(size_t usec) const {
-            LOG(INFO) << mMessage << " " << static_cast<float>(usec)/1000 << " msec";
-        }
-
-    private:
-        string mMessage;
-    };
-
     Lexicon readLexicon(const string& filepath) {
         LOG(INFO) << "Loading lexicon from '" << FLAGS_word_file << "'.";
         ifstream lexiconFile(filepath);

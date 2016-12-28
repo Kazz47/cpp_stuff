@@ -15,11 +15,8 @@ public:
         return *this;
     }
 
-    operator std::string() const {
-        return mStream.str();
-    }
+    operator std::string() const;
 
 private:
     std::ostringstream mStream;
-
 };

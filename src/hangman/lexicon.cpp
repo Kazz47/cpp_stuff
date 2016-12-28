@@ -1,25 +1,11 @@
 #include "hangman/lexicon.h"
 #include "utils/timer.h"
+#include "utils/timerLog.h"
 #include <glog/logging.h>
 #include <string>
 #include <algorithm>
 
 using namespace std;
-
-namespace {
-    class TimerLog {
-    public:
-        explicit TimerLog(const string& message)
-            : mMessage(message) {}
-
-        void operator()(size_t usec) const {
-            LOG(INFO) << mMessage << " " << static_cast<float>(usec)/1000 << " msec";
-        }
-
-    private:
-        string mMessage;
-    };
-}
 
 Lexicon::Lexicon() {}
 Lexicon::Lexicon(std::istream& inputStream) {
