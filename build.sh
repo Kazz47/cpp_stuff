@@ -1,6 +1,6 @@
 mkdir build
 pushd build
 cmake ..
-make
+make -j
 make test
 popd

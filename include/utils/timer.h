@@ -14,7 +14,7 @@ public:
         using namespace std::chrono;
 
         const auto end = high_resolution_clock::now();
-        mCallback(duration_cast<nanoseconds>(end - mStart).count());
+        mCallback(duration_cast<microseconds>(end - mStart).count());
     }
 
 private:

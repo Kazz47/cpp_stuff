@@ -1,7 +1,10 @@
 find_package (glog REQUIRED)
 find_package (gflags REQUIRED)
 
-add_executable (hangman hangman.cpp)
+add_executable (hangman
+                hangman.cpp
+                lexicon.cpp
+                cheatingManager.cpp)
 target_compile_features (hangman PRIVATE cxx_auto_type)
 target_link_libraries (hangman glog gflags)
 
