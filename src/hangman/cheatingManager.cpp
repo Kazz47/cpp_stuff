@@ -55,10 +55,7 @@ bool CheatingManager::guessLetter(char letter) {
 
     mLex = largestLexicon;
 
-    // Log lexicon
-    for (auto it = mLex.cbegin(); it != mLex.cend(); ++it) {
-        DLOG(INFO) << "Word: '" << *it << "'";
-    }
+    DLOG(INFO) << "Lexicon: " << mLex;
 
     // Update word
     for (auto it = mostCommonPattern.cbegin(); it != mostCommonPattern.cend(); ++it) {

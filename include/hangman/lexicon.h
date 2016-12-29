@@ -1,6 +1,7 @@
 #pragma once
 
 #include <istream>
+#include <ostream>
 #include <string>
 #include <set>
 
@@ -27,3 +28,5 @@ public:
 private:
     std::set<std::string> mWordSet;
 };
+
+std::ostream& operator<<(std::ostream& stream, const Lexicon& lex);

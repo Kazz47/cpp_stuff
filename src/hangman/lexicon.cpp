@@ -38,3 +38,13 @@ void Lexicon::add(const std::string& val) {
 Lexicon::iterator Lexicon::erase(Lexicon::const_iterator it) {
     return mWordSet.erase(it);
 }
+
+ostream& operator<<(ostream& stream, const Lexicon& lex) {
+    stream << "[";
+    for (auto it = lex.cbegin(); it != lex.cend(); ++it) {
+        stream << *it;
+        if (next(it) != lex.cend()) stream << ", ";
+    }
+    stream << "]";
+    return stream;
+}
