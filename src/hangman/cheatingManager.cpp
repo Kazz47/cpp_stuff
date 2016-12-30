@@ -44,11 +44,11 @@ bool CheatingManager::guessLetter(char letter) {
     }
 
     auto it = patternMap.cbegin();
-    LetterPattern mostCommonPattern = it->first;
+    LetterPattern nextPattern = it->first;
     Lexicon largestLexicon = it->second;
     for (; it != patternMap.cend(); ++it) {
         if (it->second.size() > largestLexicon.size()) {
-            mostCommonPattern = it->first;
+            nextPattern = it->first;
             largestLexicon = it->second;
         }
     }
@@ -58,11 +58,11 @@ bool CheatingManager::guessLetter(char letter) {
     DLOG(INFO) << "Lexicon: " << mLex;
 
     // Update word
-    for (auto it = mostCommonPattern.cbegin(); it != mostCommonPattern.cend(); ++it) {
+    for (auto it = nextPattern.cbegin(); it != nextPattern.cend(); ++it) {
         mWord.replace(*it, 1, 1, letter);
     }
 
-    return !mostCommonPattern.empty();
+    return !nextPattern.empty();
 }
 
 bool CheatingManager::wordGuessed() const {
