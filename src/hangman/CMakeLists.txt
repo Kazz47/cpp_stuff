@@ -5,7 +5,8 @@ add_executable (hangman
                 $<TARGET_OBJECTS:utils>
                 hangman.cpp
                 lexicon.cpp
-                cheatingManager.cpp)
+                cheatingManager.cpp
+                guesser.cpp)
 target_compile_features (hangman PRIVATE cxx_auto_type)
 target_link_libraries (hangman glog gflags)
 

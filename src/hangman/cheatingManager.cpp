@@ -27,7 +27,9 @@ bool CheatingManager::guessLetter(char letter) {
 
     // Create map of unique patterns and trim lexicon to most common pattern
     typedef vector<char> LetterPattern;
-    map<LetterPattern, Lexicon> patternMap;
+    typedef map<LetterPattern, Lexicon> PatternMap;
+
+    PatternMap patternMap;
 
     for (auto it = mLex.cbegin(); it != mLex.cend(); ++it) {
         LetterPattern pattern;
@@ -36,7 +38,7 @@ bool CheatingManager::guessLetter(char letter) {
             pattern.push_back(foundPos);
             foundPos = it->find(letter, foundPos+1);
         }
-        pair<map<LetterPattern, Lexicon>::iterator, bool> ret;
+        pair<PatternMap::iterator, bool> ret;
         Lexicon newLex;
         newLex.add(*it);
         ret = patternMap.insert(make_pair(pattern, newLex));
@@ -46,10 +48,14 @@ bool CheatingManager::guessLetter(char letter) {
     auto it = patternMap.cbegin();
     LetterPattern nextPattern = it->first;
     Lexicon largestLexicon = it->second;
+    float largestLexComplexity = largestLexicon.complexity();
+    ++it;
     for (; it != patternMap.cend(); ++it) {
-        if (it->second.size() > largestLexicon.size()) {
+        const float complexity = it->second.complexity();
+        if (complexity > largestLexComplexity) {
             nextPattern = it->first;
             largestLexicon = it->second;
+            largestLexComplexity = complexity;
         }
     }
 

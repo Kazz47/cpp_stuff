@@ -4,6 +4,7 @@
 #include <glog/logging.h>
 #include <string>
 #include <algorithm>
+#include <map>
 
 using namespace std;
 
@@ -29,6 +30,22 @@ bool Lexicon::hasSize(int length) const {
 
 size_t Lexicon::size() const {
     return mWordSet.size();
+}
+
+float Lexicon::complexity() const {
+    typedef map<char, size_t> CharMap;
+
+    float complexity = 0.0;
+    for (auto it = mWordSet.cbegin(); it != mWordSet.cend(); ++it) {
+        CharMap charMap;
+        for (auto cit = it->cbegin(); cit != it->cend(); ++cit) {
+            pair<CharMap::iterator, bool> ret = charMap.insert(make_pair(*cit, 1));
+            if (!ret.second) ret.first->second++;
+        }
+        complexity += static_cast<float>(charMap.size()) / it->size();
+    }
+    LOG(INFO) << "Lexicon has complexity " << complexity;
+    return complexity;
 }
 
 void Lexicon::add(const std::string& val) {

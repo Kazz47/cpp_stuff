@@ -16,7 +16,10 @@ public:
 
     bool hasSize(int length) const;
 
+    // Number of tokens in the lexicon
     size_t size() const;
+
+    float complexity() const;
     void add(const std::string& val);
     iterator erase(iterator);
 
