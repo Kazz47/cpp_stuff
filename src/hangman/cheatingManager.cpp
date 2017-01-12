@@ -46,20 +46,23 @@ bool CheatingManager::guessLetter(char letter) {
     }
 
     auto it = patternMap.cbegin();
-    LetterPattern nextPattern = it->first;
-    Lexicon largestLexicon = it->second;
-    float largestLexComplexity = largestLexicon.complexity();
+    vector<pair<LetterPattern, Lexicon>> lexPaternPairs;
+    lexPaternPairs.push_back(make_pair(it->first, it->second));
+    float largestLexComplexity = it->second.complexity();
     ++it;
     for (; it != patternMap.cend(); ++it) {
         const float complexity = it->second.complexity();
         if (complexity > largestLexComplexity) {
-            nextPattern = it->first;
-            largestLexicon = it->second;
+            lexPaternPairs.clear();
+            lexPaternPairs.push_back(make_pair(it->first, it->second));
             largestLexComplexity = complexity;
+        } else if (complexity == largestLexComplexity) {
+            lexPaternPairs.push_back(make_pair(it->first, it->second));
         }
     }
 
-    mLex = largestLexicon;
+    LetterPattern nextPattern;
+    tie(nextPattern, mLex) = *randomElement(lexPaternPairs.cbegin(), lexPaternPairs.cend());
 
     DLOG(INFO) << "Lexicon: " << mLex;
 
