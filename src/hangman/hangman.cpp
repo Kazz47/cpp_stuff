@@ -13,7 +13,6 @@
 
 using namespace std;
 
-
 namespace {
     const string NO_VALUE = "NONE";
 
