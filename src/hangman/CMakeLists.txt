@@ -10,6 +10,15 @@ add_executable (hangman
 target_compile_features (hangman PRIVATE cxx_auto_type)
 target_link_libraries (hangman glog gflags)
 
+add_executable (hangmanBenchmark
+                $<TARGET_OBJECTS:utils>
+                hangmanBenchmark.cpp
+                lexicon.cpp
+                cheatingManager.cpp
+                guesser.cpp)
+target_compile_features (hangmanBenchmark PRIVATE cxx_auto_type)
+target_link_libraries (hangmanBenchmark glog gflags)
+
 # Install
 install (TARGETS hangman DESTINATION bin)
 # install (FILES hangman.h DESTINATION include)
