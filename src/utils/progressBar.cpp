@@ -1,5 +1,6 @@
 #include "utils/progressBar.h"
 #include <iostream>
+#include <cmath>
 #include <glog/logging.h>
 
 using namespace std;
@@ -32,6 +33,6 @@ void ProgressBar::print() const {
     }
 
     cout << END
-        << static_cast<int>(mProgress * 100) << "%"
+        << round(mProgress * 100) << "%"
         << flush;
 }
