@@ -38,8 +38,7 @@ int main(int argc, char* argv[]) {
     LOG(INFO) << "VERSION: " << VERSION_MAJOR << "." << VERSION_MINOR;
 
     Lexicon words = readLexicon(FLAGS_word_file);
-
-    const Guesser guesser(readLexicon(FLAGS_lex_file));
+    const Lexicon guesserLex = readLexicon(FLAGS_lex_file);
 
     /**
      * Get simulations params from the user.
@@ -62,7 +61,7 @@ int main(int argc, char* argv[]) {
     const uint64_t numIterations = FLAGS_iterations;
 
     LOG(INFO) << "Starting benchmark with word length " << wordLength
-        << " and " << numTries << " tries for " << numIterations<< " iterations.";
+        << " and " << numTries << " tries for " << numIterations << " iterations.";
 
     size_t numGuesserWins = 0;
     size_t numManagerWins = 0;
@@ -70,6 +69,7 @@ int main(int argc, char* argv[]) {
     for (size_t i = 0; i < numIterations; ++i) {
         pBar.setProgress(static_cast<float>(i) / numIterations);
         pBar.print();
+        Guesser guesser(guesserLex, wordLength);
         CheatingManager manager(words, wordLength);
 
         /**

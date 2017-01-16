@@ -3,12 +3,12 @@
 #include "utils/timer.h"
 #include "utils/timerLog.h"
 #include <glog/logging.h>
+#include <unordered_map>
 #include <map>
-#include <set>
 
 using namespace std;
 
-typedef map<char, size_t> CharMap;
+typedef unordered_map<char, size_t> CharMap;
 typedef multimap<size_t, char> FreqMap;
 
 namespace {
@@ -53,17 +53,44 @@ namespace {
 Guesser::Guesser(const Lexicon& lex)
         : mLex(lex) {}
 
-char Guesser::guessLetter(const string& pattern, const set<char>& guessed) const {
+Guesser::Guesser(const Lexicon& lex, int wordLength)
+        : mLex(lex) {
+    for (auto it = mLex.begin(); it != mLex.end();) {
+        if (it->size() != wordLength) it = mLex.erase(it);
+        else ++it;
+    }
+}
+
+char Guesser::guessLetter(const string& pattern, const set<char>& guessed) {
     const TimerLog callback("Made a guess in");
     const Timer timer(callback);
 
+    for (auto it = guessed.cbegin(); it != guessed.cend(); ++it) {
+        if (pattern.find(*it) == string::npos) this->removeLetter(*it);
+    }
+    CHECK(mLex.size() > 0);
+
     const Lexicon filteredLex = getFilteredLexicon(mLex, pattern);
+    CHECK(filteredLex.size() > 0);
 
     const CharMap charMap = buildCharMap(filteredLex, guessed);
+    CHECK(charMap.cbegin() != charMap.cend());
+
     const FreqMap freqMap = buildFrequencyMap(charMap);
+    CHECK(freqMap.crbegin() != freqMap.crend());
 
     // Guess from FreqMap
     const pair<FreqMap::const_iterator, FreqMap::const_iterator> ret
-        = freqMap.equal_range(freqMap.crbegin()->first);
+        = freqMap.equal_range(freqMap.crbegin()->first); // Get most frequent letters.
     return randomElement(ret.first, ret.second)->second;
+}
+
+void Guesser::removeLetter(char letter) {
+    for (auto it = mLex.begin(); it != mLex.end();) {
+        if (it->find(letter) != string::npos) {
+            it = mLex.erase(it);
+        } else {
+            ++it;
+        }
+    }
 }

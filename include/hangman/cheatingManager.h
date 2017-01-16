@@ -1,6 +1,9 @@
 #pragma once
 
-#include "hangman/lexicon.h"
+#include <string>
+#include <memory>
+
+class Lexicon;
 
 class CheatingManager {
 
@@ -14,6 +17,6 @@ public:
     bool wordGuessed() const;
 
 private:
-    Lexicon mLex;
+    std::shared_ptr<Lexicon> mLex;
     std::string mWord;
 };

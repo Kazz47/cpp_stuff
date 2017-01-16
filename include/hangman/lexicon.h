@@ -3,13 +3,13 @@
 #include <istream>
 #include <ostream>
 #include <string>
-#include <set>
+#include <unordered_set>
 
 class Lexicon {
 
 public:
-    typedef std::set<std::string>::iterator iterator;
-    typedef std::set<std::string>::const_iterator const_iterator;
+    typedef std::unordered_set<std::string>::iterator iterator;
+    typedef std::unordered_set<std::string>::const_iterator const_iterator;
 
     Lexicon();
     explicit Lexicon(std::istream& inputStream);
@@ -29,7 +29,7 @@ public:
     iterator end() { return mWordSet.end(); }
 
 private:
-    std::set<std::string> mWordSet;
+    std::unordered_set<std::string> mWordSet;
 };
 
 std::ostream& operator<<(std::ostream& stream, const Lexicon& lex);
