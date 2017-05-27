@@ -4,7 +4,7 @@
 #include <glog/logging.h>
 #include <string>
 #include <algorithm>
-#include <map>
+#include <unordered_map>
 
 using namespace std;
 
@@ -33,7 +33,7 @@ size_t Lexicon::size() const {
 }
 
 float Lexicon::complexity() const {
-    typedef map<char, size_t> CharMap;
+    typedef unordered_map<char, size_t> CharMap;
 
     float complexity = 0.0;
     for (auto it = mWordSet.cbegin(); it != mWordSet.cend(); ++it) {

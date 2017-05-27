@@ -9,7 +9,8 @@ add_executable (util_tests
                 sortedTest.cpp
                 statsTest.cpp
                 nodeTest.cpp
-                treeHelperTest.cpp)
+                treeHelperTest.cpp
+                bitsTest.cpp)
 target_compile_features (util_tests PRIVATE cxx_aggregate_default_initializers)
 target_link_libraries (util_tests ${GTEST_BOTH_LIBRARIES} glog)
 

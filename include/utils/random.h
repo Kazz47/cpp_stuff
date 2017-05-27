@@ -4,8 +4,7 @@
 #include <iterator>
 
 template <typename Iter>
-Iter randomElement(const Iter& begin, const Iter& end)
-{
+Iter randomElement(const Iter& begin, const Iter& end) {
     using namespace std;
 
     static std::random_device rd;
